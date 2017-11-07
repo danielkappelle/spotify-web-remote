@@ -60,7 +60,20 @@ function refresh(callback) {
 //     });
 // });
 
-app.get('/api/:control', function(req,res,next) {
+app.get('/api/currentSong', function(req,res,next) {
+    spotifyApi.getMyCurrentPlayingTrack()
+    .then(function(data) {
+        res.send(data);
+        // res.send(200);
+    }, function(err) {
+        console.log(err);
+        refresh(function() {
+            res.redirect('/api/currentSong');
+        });
+    });
+});
+
+app.get('/api/control/:control', function(req,res,next) {
     switch(req.params.control) {
         case 'pause':
             var prom = spotifyApi.pause();
@@ -87,7 +100,7 @@ app.get('/api/:control', function(req,res,next) {
     }, function(err) {
         console.log(err);
         refresh(function() {
-            res.redirect('/api/' + req.params.control);
+            res.redirect('/api/control/' + req.params.control);
         });
         // res.send(501);
     });
