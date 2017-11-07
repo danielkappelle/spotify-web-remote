@@ -37,9 +37,10 @@
                   <p class="song-title">Bar Song</p>
                 </div>
                 <div class="btn-ctrls-btns">
-                  <button class="btn btn-play-ctrls"><span class="fa fa-backward"></span></button>
-                  <button class="btn btn-play-ctrls" ng-click="control('pause')"><span class="fa fa-pause"></span></button>
-                  <button class="btn btn-play-ctrls"><span class="fa fa-forward"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="control('prev')"><span class="fa fa-backward"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="control('pause')" ng-show="playing"><span class="fa fa-pause"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="control('play')" ng-show="!playing"><span class="fa fa-play"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="control('next')"><span class="fa fa-forward"></span></button>
                 </div>
               </div>
         </div>
