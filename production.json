@@ -1,0 +1,21 @@
+{
+    "apps": [
+      {
+        "name": "spotremote",
+        "script": "server/server.js",
+        "env": {
+          "COMMON_VARIABLE": "true"
+        },
+        "env_production": {
+          "NODE_ENV": "production",
+          "NODE_PORT": 3030
+        },
+        "env_staging": {
+          "NODE_ENV": "staging"
+        },
+        "env_development": {
+          "NODE_ENV": "development"
+        }
+      }
+    ]
+  }

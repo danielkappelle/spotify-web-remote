@@ -1,0 +1,46 @@
+@green-dark: #11ED5E;
+@gray-light: #aaa;
+@gray-dark: #111;
+@text-color: #222;
+
+.navbar-default {
+    background-color: @green-dark;
+    border-color: @green-dark;
+    .navbar-brand {
+        color: @text-color;
+    }
+}
+
+.control {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    .songinfo {
+        text-align: center;
+        color: @gray-light;
+        .song-artist {
+            font-weight: bold;
+        }
+        .song-title {
+            font-style: italic;
+        }
+    }
+    .btn-ctrls-btns {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        button.btn-play-ctrls {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            background-color: @text-color;
+            color: @gray-light;
+            border: 1px solid @gray-light;
+        }
+    }
+}
+
+html,body {
+    background-color: @gray-dark;
+}

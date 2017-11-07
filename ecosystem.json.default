@@ -1,0 +1,30 @@
+{
+    /**
+     * Deployment section
+     * http://pm2.keymetrics.io/docs/usage/deployment/
+     */
+    deploy : {
+      development : {
+        user : "",
+        host : "",
+        ref  : "origin/development",
+        repo : "git@github.com:danielkappelle/spotify-web-remote.git",
+        path : "/var/node/spotremote-dev",
+        "post-deploy" : "npm install && cd client && npm install && bower install --force-latest && grunt && cd .. && NODE_ENV=development pm2 startOrRestart development.json --env development",
+        env  : {
+          NODE_ENV: "development"
+        }
+      },
+      production : {
+        user : "",
+        host : "",
+        ref  : "origin/master",
+        repo : "git@github.com:danielkappelle/spotify-web-remote.git",
+        path : "/var/node/spotremote/",
+        "post-deploy" : "npm install && cd client && npm install && bower install --force-latest && grunt && cd .. && NODE_ENV=production pm2 startOrRestart production.json --env production",
+        env  : {
+          NODE_ENV: "production"
+        }
+      }
+    }
+  }
