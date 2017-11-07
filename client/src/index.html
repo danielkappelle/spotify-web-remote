@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="spotifyWebApp">
     <head>
         <script src="js/all.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="css/all.min.css" type="text/css">
     </head>
     <body>
-        <div id="wrapper">
+        <div id="wrapper" ng-controller="playCtrl">
             <h1>Spotify web remote</h1>
-            <p>(c) Daniel Kappelle <span class="fa fa-eye"></span></p>
+            <p><button class="btn btn-default" type="button" ng-click="control('play')"><span class="fa fa-play"></span></button><button class="btn btn-default" ng-click="control('pause')" type="button"><span class="fa fa-pause"></span></button></p>
         </div>
     </body>
 </html>
