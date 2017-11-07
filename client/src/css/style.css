@@ -1,0 +1,40 @@
+.navbar-default {
+  background-color: #11ED5E;
+  border-color: #11ED5E;
+}
+.navbar-default .navbar-brand {
+  color: #222;
+}
+.control {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+}
+.control .songinfo {
+  text-align: center;
+  color: #aaa;
+}
+.control .songinfo .song-artist {
+  font-weight: bold;
+}
+.control .songinfo .song-title {
+  font-style: italic;
+}
+.control .btn-ctrls-btns {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.control .btn-ctrls-btns button.btn-play-ctrls {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #222;
+  color: #aaa;
+  border: 1px solid #aaa;
+}
+html,
+body {
+  background-color: #111;
+}

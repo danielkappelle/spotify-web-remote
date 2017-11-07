@@ -38,6 +38,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        less: {
+            development: {
+                files: {
+                  "src/css/style.css": "src/less/style.less" // destination file and source file
+                }
+              }
+        },
 
         cssmin: {
             options: {
@@ -50,7 +57,7 @@ module.exports = function(grunt) {
                         'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
                         'bower_components/font-awesome/css/font-awesome.css',
                         'bower_components/angularMultipleSelect/build/multiple-select.css',
-                        'css/**/*.css',
+                        'src/css/**/*.css',
                     ]
                 }
             }
@@ -58,8 +65,12 @@ module.exports = function(grunt) {
 
         watch: {
             stylesheets: {
-                files: ['src/less/**/*.css'],
+                files: ['src/css/**/*.css'],
                 tasks: ['cssmin']
+            },
+            less: {
+                files: ['src/less/**/*.less'],
+                tasks: ['less']
             },
             scripts: {
                 files: 'src/js/**/*.js',
@@ -102,7 +113,9 @@ module.exports = function(grunt) {
       grunt.loadNpmTasks('grunt-contrib-cssmin');
       grunt.loadNpmTasks('grunt-contrib-watch');
       grunt.loadNpmTasks('grunt-contrib-copy');
+      grunt.loadNpmTasks('grunt-contrib-less');
 
-      grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'copy']);
+      grunt.registerTask('default', ['jshint', 'uglify','less', 'cssmin', 'copy']);
+    //   grunt.registerTask('less', ['less']);
     
     };
