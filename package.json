@@ -1,0 +1,19 @@
+{
+  "name": "spotify-web-remote",
+  "version": "1.0.0",
+  "description": "Spotify remote webapp",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielkappelle/spotify-web-remote.git"
+  },
+  "author": "Daniel Kappelle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielkappelle/spotify-web-remote/issues"
+  },
+  "homepage": "https://github.com/danielkappelle/spotify-web-remote#readme"
+}
