@@ -17,13 +17,14 @@ var spotifyApi = new SpotifyWebApi({
 spotifyApi.setAccessToken(config.accessToken);
 spotifyApi.setRefreshToken(config.refreshToken);
 
-function refresh() {
+function refresh(callback) {
     spotifyApi.refreshAccessToken()
     .then(function(data) {
       console.log('The access token has been refreshed!');
   
       // Save the access token so that it's used in future calls
       spotifyApi.setAccessToken(data.body['access_token']);
+      callback.call();
     }, function(err) {
       console.log('Could not refresh access token', err);
     });
@@ -33,42 +34,30 @@ app.get('/api/pause', function(req, res, next) {
     spotifyApi.pause()
     .then(function(data) {
       console.log('Pause');
+      res.send(200);
     }, function(err) {
         if(err.statusCode == 401) {
-            refresh();
-            res.redirect('/api/pause');
+            refresh(function() {
+                res.redirect('/api/pause');
+            });
         }
       console.error(err);
     });
-    res.send(200);
 });
 
 app.get('/api/play', function(req, res, next) {
     spotifyApi.play()
     .then(function(data) {
-      console.log('Play');
+        console.log('Play');
+        res.send(200);
     }, function(err) {
         if(err.statusCode == 401) {
-            refresh();
-            res.redirect('/api/play');
+            refresh(function() {
+                res.redirect('/api/play');
+            });
         }
       console.error(err);
     });
-    res.send(200);
-});
-
-app.get('/asdf', function(req, res) {
-    // Get Elvis' albums
-spotifyApi.pause()
-.then(function(data) {
-  console.log('Artist albums', data.body);
-}, function(err) {
-    if(err.statusCode == 401) {
-        refresh();
-    }
-  console.error(err);
-});
-res.send(200);
 });
 
 app.use(express.static(path.join(__dirname, '../client/dist/')));
