@@ -1,15 +1,18 @@
 .navbar-default {
-  background-color: #11ED5E;
-  border-color: #11ED5E;
+  background-color: #000;
+  border: 0;
+  border-bottom: 1px solid #11ED5E;
 }
 .navbar-default .navbar-brand {
-  color: #222;
+  color: #11ED5E;
 }
 .control {
   position: absolute;
   bottom: 20px;
   left: 0;
   right: 0;
+  padding-top: 10px;
+  border-top: 1px solid #aaa;
 }
 .control .songinfo {
   text-align: center;

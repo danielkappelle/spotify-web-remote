@@ -30,33 +30,79 @@ function refresh(callback) {
     });
 }
   
-app.get('/api/pause', function(req, res, next) {
-    spotifyApi.pause()
+// app.get('/api/pause', function(req, res, next) {
+//     spotifyApi.pause()
+//     .then(function(data) {
+//       console.log('Pause');
+//       res.send(200);
+//     }, function(err) {
+//         if(err.statusCode == 401) {
+//             refresh(function() {
+//                 res.redirect('/api/pause');
+//             });
+//         }
+//       console.error(err);
+//     });
+// });
+
+// app.get('/api/play', function(req, res, next) {
+//     spotifyApi.play()
+//     .then(function(data) {
+//         console.log('Play');
+//         res.send(200);
+//     }, function(err) {
+//         if(err.statusCode == 401) {
+//             refresh(function() {
+//                 res.redirect('/api/play');
+//             });
+//         }
+//       console.error(err);
+//     });
+// });
+
+app.get('/api/currentSong', function(req,res,next) {
+    spotifyApi.getMyCurrentPlayingTrack()
     .then(function(data) {
-      console.log('Pause');
-      res.send(200);
+        res.send(data);
+        // res.send(200);
     }, function(err) {
-        if(err.statusCode == 401) {
-            refresh(function() {
-                res.redirect('/api/pause');
-            });
-        }
-      console.error(err);
+        console.log(err);
+        refresh(function() {
+            res.redirect('/api/currentSong');
+        });
     });
 });
 
-app.get('/api/play', function(req, res, next) {
-    spotifyApi.play()
-    .then(function(data) {
-        console.log('Play');
+app.get('/api/control/:control', function(req,res,next) {
+    switch(req.params.control) {
+        case 'pause':
+            var prom = spotifyApi.pause();
+            console.log('pause');
+            break;
+        case 'play':
+            var prom = spotifyApi.play();
+            console.log('play');
+            break;
+        case 'prev':
+            var prom = spotifyApi.skipToPrevious();
+            console.log('previous');
+            break;
+        case 'next':
+            var prom = spotifyApi.skipToNext();
+            console.log('next');
+            break;
+        default:
+            console.log('whatever');
+            break;
+    }
+    prom.then(function() {
         res.send(200);
     }, function(err) {
-        if(err.statusCode == 401) {
-            refresh(function() {
-                res.redirect('/api/play');
-            });
-        }
-      console.error(err);
+        console.log(err);
+        refresh(function() {
+            res.redirect('/api/control/' + req.params.control);
+        });
+        // res.send(501);
     });
 });
 

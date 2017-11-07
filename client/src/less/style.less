@@ -2,12 +2,14 @@
 @gray-light: #aaa;
 @gray-dark: #111;
 @text-color: #222;
+@black: #000;
 
 .navbar-default {
-    background-color: @green-dark;
-    border-color: @green-dark;
+    background-color: @black;
+    border: 0;
+    border-bottom: 1px solid @green-dark;
     .navbar-brand {
-        color: @text-color;
+        color: @green-dark;
     }
 }
 
@@ -16,6 +18,9 @@
     bottom: 20px;
     left: 0;
     right: 0;
+    padding-top: 10px;
+    border-top: 1px solid @gray-light;
+
     .songinfo {
         text-align: center;
         color: @gray-light;
