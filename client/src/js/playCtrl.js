@@ -37,6 +37,7 @@ app.controller('playCtrl', ['$scope', '$http', function($scope, $http) {
           }
         }
         $scope.song.title = response.data.body.item.name;
+        $scope.song.image = response.data.body.item.album.images[0].url;
       }, function(err) {
         console.log(err);
       });
