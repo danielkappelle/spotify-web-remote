@@ -3,10 +3,14 @@ app.controller('playCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.song = {};
     refreshRate = 1000; // Milliseconds of refresh time
 
+    /**
+     * Control the playback, sends an API call
+     * @param {String} control - The type of control (gets passed
+     * directly to the API), play/pause/next/prev
+     */
     $scope.control = function(control) {
         $http.get('/api/control/' + control)
         .then(function(response) {
-          console.log('yes');
           if(control == 'play' || control == 'pause') {
             $scope.playing = !$scope.playing;
           }
@@ -15,6 +19,9 @@ app.controller('playCtrl', ['$scope', '$http', function($scope, $http) {
         });
     };
 
+    /**
+     * Update the current playing info
+     */
     $scope.updateInfo = function() {
       $http.get('/api/currentSong')
       .then(function(response) {
@@ -35,5 +42,8 @@ app.controller('playCtrl', ['$scope', '$http', function($scope, $http) {
       });
     };
 
+    /**
+     * Set the update interval (polling)
+     */
     setInterval($scope.updateInfo, refreshRate);
 }]);
