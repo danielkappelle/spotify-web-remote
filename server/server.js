@@ -7,7 +7,7 @@ const request = require('request');
 const SpotifyWebApi = require('spotify-web-api-node');
 const config = require('./config');
 
-// credentials are optional
+/* Initalize the Spotify API */
 var spotifyApi = new SpotifyWebApi({
     clientId : config.clientId,
     clientSecret : config.clientSecret,
@@ -17,6 +17,10 @@ var spotifyApi = new SpotifyWebApi({
 spotifyApi.setAccessToken(config.accessToken);
 spotifyApi.setRefreshToken(config.refreshToken);
 
+/**
+ * Refresh the Spotify access token
+ * @param {function} callback - Callback function that gets called when refreshing is done
+ */
 function refresh(callback) {
     spotifyApi.refreshAccessToken()
     .then(function(data) {
@@ -29,37 +33,10 @@ function refresh(callback) {
       console.log('Could not refresh access token', err);
     });
 }
-  
-// app.get('/api/pause', function(req, res, next) {
-//     spotifyApi.pause()
-//     .then(function(data) {
-//       console.log('Pause');
-//       res.send(200);
-//     }, function(err) {
-//         if(err.statusCode == 401) {
-//             refresh(function() {
-//                 res.redirect('/api/pause');
-//             });
-//         }
-//       console.error(err);
-//     });
-// });
 
-// app.get('/api/play', function(req, res, next) {
-//     spotifyApi.play()
-//     .then(function(data) {
-//         console.log('Play');
-//         res.send(200);
-//     }, function(err) {
-//         if(err.statusCode == 401) {
-//             refresh(function() {
-//                 res.redirect('/api/play');
-//             });
-//         }
-//       console.error(err);
-//     });
-// });
-
+/**
+ * Get the current playing song information
+ */
 app.get('/api/currentSong', function(req,res,next) {
     spotifyApi.getMyCurrentPlayingTrack()
     .then(function(data) {
@@ -73,6 +50,9 @@ app.get('/api/currentSong', function(req,res,next) {
     });
 });
 
+/**
+ * Control the playback, pause, play, prev, next
+ */
 app.get('/api/control/:control', function(req,res,next) {
     switch(req.params.control) {
         case 'pause':
@@ -102,22 +82,25 @@ app.get('/api/control/:control', function(req,res,next) {
         refresh(function() {
             res.redirect('/api/control/' + req.params.control);
         });
-        // res.send(501);
     });
 });
 
+/* The front end */
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 
+/* Optional: port on which the server listens */
 if(typeof(process.env.NODE_PORT) !== 'undefined') {
   port = process.env.NODE_PORT;
 } else {
   port = 3000; // Default port
 }
 
+/* Start the web server */
 app.listen(port, function() {
     console.log('Listening on ' + port);
 });
   
+/* Necessary for some proxy configurations */
 app.enable('trust proxy');
   
 app.options("/*", function(req, res, next){
