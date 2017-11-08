@@ -1,6 +1,8 @@
 # Spotify Web Remote
 This is a web based remote/commander for spotify. It works with the Spotify web api and can be used to control your spotify account. First you'll have to set up the API keys.
 
+![Screenshot](/example.png?raw=true "Screen shot")
+
 ## Setting up the authorization
 [TODO]
 
