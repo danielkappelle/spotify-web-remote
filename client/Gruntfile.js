@@ -115,7 +115,7 @@ module.exports = function(grunt) {
       grunt.loadNpmTasks('grunt-contrib-copy');
       grunt.loadNpmTasks('grunt-contrib-less');
 
-      grunt.registerTask('default', ['jshint', 'uglify','less', 'cssmin', 'copy']);
+      grunt.registerTask('default', ['jshint', 'uglify','less', 'cssmin', 'copy', 'watch']);
     //   grunt.registerTask('less', ['less']);
     
     };

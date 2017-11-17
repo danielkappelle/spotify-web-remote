@@ -85,6 +85,15 @@ app.get('/api/control/:control', function(req,res,next) {
     });
 });
 
+app.get('/api/control/volume/:volume', function(req, res, next) {
+    spotifyApi.setVolume(req.params.volume).then(function() {
+        res.send(200);  
+    }, function(err) {
+        console.log(err);
+        res.send(501);
+    });
+});
+
 /* The front end */
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 
