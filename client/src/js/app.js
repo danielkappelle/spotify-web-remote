@@ -1,1 +1,1 @@
-var app = angular.module('spotifyWebApp', ['ui.bootstrap']);
+var app = angular.module('spotifyWebApp', ['ui.bootstrap', 'ngMaterial']);

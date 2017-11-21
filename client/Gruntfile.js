@@ -32,7 +32,10 @@ module.exports = function(grunt) {
                         'bower_components/bootstrap/dist/js/bootstrap.js',
                         'bower_components/angular/angular.js',
                         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-                        'bower_components/angularMultipleSelect/build/multiple-select.js',
+                        'bower_components/angular-aria/angular-aria.js',
+                        'bower_components/angular-messages/angular-messages.js',
+                        'bower_components/angular-animate/angular-animate.js',
+                        'bower_components/angular-material/angular-material.js',
                         'src/js/**/*.js',
                     ]
                 }
@@ -56,7 +59,7 @@ module.exports = function(grunt) {
                         'bower_components/bootstrap/dist/css/bootstrap.css',
                         'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
                         'bower_components/font-awesome/css/font-awesome.css',
-                        'bower_components/angularMultipleSelect/build/multiple-select.css',
+                        'bower_components/angular-material/angular-material.css',
                         'src/css/**/*.css',
                     ]
                 }

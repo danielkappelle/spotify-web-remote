@@ -2,6 +2,12 @@ app.controller('playCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.playing = false;
     $scope.song = {};
     refreshRate = 1000; // Milliseconds of refresh time
+    $scope.volumeControls = false;
+
+    $scope.openVolume = function() {
+      $scope.volumeControls = !$scope.volumeControls;
+      console.log($scope.volumeControls);
+    };
 
     /**
      * Control the playback, sends an API call

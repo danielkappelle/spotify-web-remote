@@ -34,11 +34,31 @@
                   <p class="song-artist">{{song.artist}}</p>
                   <p class="song-title">{{song.title}}</p>
                 </div>
+                <div class="btn-ctrls-btns-small">
+                  <button class="btn btn-play-ctrls" ng-click="openVolume()"><span class="fa fa-random"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="openVolume()"><span class="fa fa-repeat"></span></button>
+                  <button class="btn btn-play-ctrls" ng-click="openVolume()"><span class="fa fa-volume-up"></span></button>
+                </div>
                 <div class="btn-ctrls-btns">
                   <button class="btn btn-play-ctrls" ng-click="control('prev')"><span class="fa fa-backward"></span></button>
                   <button class="btn btn-play-ctrls" ng-click="control('pause')" ng-show="playing"><span class="fa fa-pause"></span></button>
                   <button class="btn btn-play-ctrls" ng-click="control('play')" ng-show="!playing"><span class="fa fa-play"></span></button>
                   <button class="btn btn-play-ctrls" ng-click="control('next')"><span class="fa fa-forward"></span></button>
+                </div>
+              </div>
+              <div ng-if="volumeControls" class="volume-ctrls-container">
+                <div class="volume-ctrls-content">
+                  <div class="volume-ctrls-btns">
+                    <div class="item">
+                      <span class="fa fa-volume-down"></span>
+                    </div>
+                    <div clas="item">
+                      <md-slider min="0" max="100" aria-label="test"></md-slider>
+                    </div>
+                    <div class="item">
+                      <span class="fa fa-volume-up"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
         </div>
