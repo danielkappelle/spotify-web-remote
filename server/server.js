@@ -85,6 +85,17 @@ app.get('/api/control/:control', function(req,res,next) {
     });
 });
 
+
+app.get('/api/search/:q', function(req, res, next) {
+    spotifyApi.search(req.params.q, ['album', 'artist', 'playlist', 'track'])
+        .then(function(result) {
+            res.send(result)
+        }, function(err) {
+            console.log(err)
+            res.sendStatus(500)
+        })
+})
+
 /* The front end */
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 
