@@ -14,5 +14,12 @@ module.exports = {
       {test: /\.(woff(2)?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'}
     ]
   },
-  plugins: [htmlPlugin]
+  plugins: [htmlPlugin],
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000'
+      }
+    }
+  }
 }

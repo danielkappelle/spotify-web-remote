@@ -76,7 +76,7 @@ app.get('/api/control/:control', function(req,res,next) {
             break;
     }
     prom.then(function() {
-        res.send(200);
+        res.send({status: 'ok'})
     }, function(err) {
         console.log(err);
         refresh(function() {
