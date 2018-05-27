@@ -3,6 +3,7 @@ import './style.css'
 import 'font-awesome/css/font-awesome.css'
 import logo from './logo.svg'
 import * as api from './api.js'
+import * as _ from 'lodash'
 
 class App extends Component {
   constructor (props) {
@@ -13,10 +14,13 @@ class App extends Component {
       song: 'Loading...',
       playing: false,
       artworkUrl: 'nil',
-      searchResults: []
+      searchResults: [],
+      showSearch: false
     }
 
     this.onResultsChange = this.onResultsChange.bind(this)
+    this.clearSearch = this.clearSearch.bind(this)
+    this.openSearch = this.openSearch.bind(this)
   }
 
   componentDidMount () {
@@ -42,6 +46,12 @@ class App extends Component {
       })
   }
 
+  openSearch () {
+    this.setState({
+      showSearch: true
+    })
+  }
+
   onResultsChange (newResults) {
     console.log('Results changed')
     this.setState({
@@ -49,11 +59,17 @@ class App extends Component {
     })
   }
 
+  clearSearch () {
+    this.setState({
+      searchResults: []
+    })
+  }
+
   render () {
     return (
       <div className='App'>
-        <Header onResultsChange={this.onResultsChange} />
-        <Body artworkUrl={this.state.artworkUrl} searchResults={this.state.searchResults} />
+        <Header onResultsChange={this.onResultsChange} showSearch={this.state.showSearch} openSearch={this.openSearch} />
+        <Body artworkUrl={this.state.artworkUrl} searchResults={this.state.searchResults} clearSearch={this.clearSearch} />
         <Controls artist={this.state.artist} song={this.state.song} playing={this.state.playing} />
       </div>
     )
@@ -67,27 +83,26 @@ class Header extends Component {
     this.state = {
       showSearch: false
     }
-
-    this.openSearch = this.openSearch.bind(this)
-  }
-
-  openSearch () {
-    this.setState({
-      showSearch: true
-    })
   }
 
   search (e) {
-    console.log('search', e.target.value)
-    this.props.onResultsChange(['a', 'b', 'c'])
+    api.get('search/' + e.target.value)
+      .then((result) => {
+        let searchResults = []
+        /* tracks */
+        _.forEach(result.body.tracks.items, (track) => {
+          searchResults.push({name: track.name, uri: track.uri})
+        })
+        this.props.onResultsChange(searchResults)
+      })
   }
 
   render () {
     return (
       <header>
         <img src={logo} />
-        <div className='search-icon' onClick={this.openSearch}><span className='fa fa-search' /></div>
-        { this.state.showSearch && <div className='search-bar'><input type='text' placeholder='Search' onKeyUp={e => this.search(e)} /></div> }
+        <div className='search-icon' onClick={this.props.openSearch}><span className='fa fa-search' /></div>
+        { this.props.showSearch && <div className='search-bar'><input type='text' placeholder='Search' onKeyUp={e => this.search(e)} /></div> }
       </header>
     )
   }
@@ -103,7 +118,7 @@ class Body extends Component {
         { this.props.searchResults.length > 0 &&
           <div className='search-results'>
             {this.props.searchResults.map((result, key) =>
-              <SearchResult resultName={result} />
+              <SearchResult result={result} clearSearch={this.props.clearSearch} />
             )}
           </div>
         }
@@ -113,9 +128,19 @@ class Body extends Component {
 }
 
 class SearchResult extends Component {
+  constructor (props) {
+    super(props)
+    this.playSong = this.playSong.bind(this)
+  }
+
+  playSong () {
+    api.get('play/' + this.props.result.uri)
+    this.props.clearSearch()
+  }
+
   render () {
     return (
-      <div className='search-result'>{this.props.resultName}</div>
+      <div className='search-result' onClick={this.playSong}>{this.props.result.name}</div>
     )
   }
 }
