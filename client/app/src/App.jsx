@@ -61,7 +61,8 @@ class App extends Component {
 
   clearSearch () {
     this.setState({
-      searchResults: []
+      searchResults: [],
+      showSearch: false
     })
   }
 
