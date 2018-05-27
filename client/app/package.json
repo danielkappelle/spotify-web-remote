@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot --host 0.0.0.0",
+    "start": "webpack-dev-server --mode development --open --watch-poll --host 0.0.0.0",
     "build": "webpack --mode production"
   },
   "keywords": [],

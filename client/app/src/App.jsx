@@ -12,8 +12,11 @@ class App extends Component {
       artist: 'Loading...',
       song: 'Loading...',
       playing: false,
-      artworkUrl: 'nil'
+      artworkUrl: 'nil',
+      searchResults: []
     }
+
+    this.onResultsChange = this.onResultsChange.bind(this)
   }
 
   componentDidMount () {
@@ -38,11 +41,19 @@ class App extends Component {
         })
       })
   }
+
+  onResultsChange (newResults) {
+    console.log('Results changed')
+    this.setState({
+      searchResults: newResults
+    })
+  }
+
   render () {
     return (
       <div className='App'>
-        <Header />
-        <Body artworkUrl={this.state.artworkUrl} />
+        <Header onResultsChange={this.onResultsChange} />
+        <Body artworkUrl={this.state.artworkUrl} searchResults={this.state.searchResults} />
         <Controls artist={this.state.artist} song={this.state.song} playing={this.state.playing} />
       </div>
     )
@@ -50,11 +61,33 @@ class App extends Component {
 }
 
 class Header extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      showSearch: false
+    }
+
+    this.openSearch = this.openSearch.bind(this)
+  }
+
+  openSearch () {
+    this.setState({
+      showSearch: true
+    })
+  }
+
+  search (e) {
+    console.log('search', e.target.value)
+    this.props.onResultsChange(['a', 'b', 'c'])
+  }
+
   render () {
     return (
       <header>
         <img src={logo} />
-        <div className='search-icon'><span className='fa fa-search' /></div>
+        <div className='search-icon' onClick={this.openSearch}><span className='fa fa-search' /></div>
+        { this.state.showSearch && <div className='search-bar'><input type='text' placeholder='Search' onKeyUp={e => this.search(e)} /></div> }
       </header>
     )
   }
@@ -63,9 +96,26 @@ class Header extends Component {
 class Body extends Component {
   render () {
     return (
-      <div className='artwork'>
-        <img src={this.props.artworkUrl} />
+      <div className='body'>
+        <div className='artwork'>
+          <img src={this.props.artworkUrl} />
+        </div>
+        { this.props.searchResults.length > 0 &&
+          <div className='search-results'>
+            {this.props.searchResults.map((result, key) =>
+              <SearchResult resultName={result} />
+            )}
+          </div>
+        }
       </div>
+    )
+  }
+}
+
+class SearchResult extends Component {
+  render () {
+    return (
+      <div className='search-result'>{this.props.resultName}</div>
     )
   }
 }
