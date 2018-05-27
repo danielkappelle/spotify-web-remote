@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot --host 0.0.0.0",
+    "start": "webpack-dev-server --mode development --open --watch-poll --host 0.0.0.0",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
     "bulma": "^0.7.1",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.10",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "standard": "^11.0.1"

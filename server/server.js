@@ -28,6 +28,7 @@ function refresh(callback) {
   
       // Save the access token so that it's used in future calls
       spotifyApi.setAccessToken(data.body['access_token']);
+      console.log(data.body['access_token'])
       callback.call();
     }, function(err) {
       console.log('Could not refresh access token', err);
@@ -84,6 +85,16 @@ app.get('/api/control/:control', function(req,res,next) {
         });
     });
 });
+
+app.get('/api/play/:track', function(req, res, next) {
+    spotifyApi.play({uris: [req.params.track]})
+        .then(function() {
+            res.send({status: 'ok'})
+        }, function(err) {
+            console.log(err)
+            res.send(500)
+        })
+})
 
 
 app.get('/api/search/:q', function(req, res, next) {
