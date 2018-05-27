@@ -93,6 +93,14 @@ div.search-result {
     overflow: hidden;
 }
 
+div.clear-search {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    font-size: 1.8em;
+    color: gray;
+}
+
 .artwork {
     position: absolute;
     top: 50px;

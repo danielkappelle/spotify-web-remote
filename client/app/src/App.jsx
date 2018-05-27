@@ -69,7 +69,7 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <Header onResultsChange={this.onResultsChange} showSearch={this.state.showSearch} openSearch={this.openSearch} />
+        <Header onResultsChange={this.onResultsChange} showSearch={this.state.showSearch} openSearch={this.openSearch} clearSearch={this.clearSearch} />
         <Body artworkUrl={this.state.artworkUrl} searchResults={this.state.searchResults} clearSearch={this.clearSearch} />
         <Controls artist={this.state.artist} song={this.state.song} playing={this.state.playing} />
       </div>
@@ -109,7 +109,8 @@ class Header extends Component {
       <header>
         <img src={logo} />
         <div className='search-icon' onClick={this.props.openSearch}><span className='fa fa-search' /></div>
-        { this.props.showSearch && <div className='search-bar'><input type='text' placeholder='Search' onKeyUp={e => this.search(e)} /></div> }
+        { this.props.showSearch && <div className='search-bar'><input type='text' placeholder='Search' onKeyUp={e => this.search(e)} />
+          <div className='clear-search' onClick={this.props.clearSearch}><span className='fa fa-times' /></div></div> }
       </header>
     )
   }
