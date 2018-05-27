@@ -89,6 +89,8 @@ div.search-result {
     border-bottom: 1px solid gray;
     color: lightgray;
     padding-left: 5px;
+    width: 95%;
+    overflow: hidden;
 }
 
 .artwork {

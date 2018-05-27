@@ -84,9 +84,13 @@ class Header extends Component {
     this.state = {
       showSearch: false
     }
+
+    this.searchCounter = 0
   }
 
   search (e) {
+    this.searchCounter += 1
+    let currentSearchCounter = this.searchCounter
     api.get('search/' + e.target.value)
       .then((result) => {
         let searchResults = []
@@ -94,7 +98,9 @@ class Header extends Component {
         _.forEach(result.body.tracks.items, (track) => {
           searchResults.push({name: track.name, uri: track.uri})
         })
-        this.props.onResultsChange(searchResults)
+        if (this.searchCounter === currentSearchCounter) {
+          this.props.onResultsChange(searchResults)
+        }
       })
   }
 
