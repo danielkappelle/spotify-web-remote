@@ -1,0 +1,125 @@
+body,html {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    font-family: sans-serif;
+}
+
+header {
+    height: 50px;
+    border-bottom: 1px solid #84bd00;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+div.controls {
+    position: absolute;
+    bottom: 0;
+    height: 130px;
+    width: 100%;
+    border-top: 1px solid gray;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.btn-controls {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    border: 1px solid #84bd00;
+    background-color: #222;
+    margin: 3px;
+    color: gray;
+}
+
+.artist {
+    color: gray;
+    font-weight: bold;
+}
+
+.song {
+    color: gray;
+    font-style: italic;
+}
+
+div.search-icon {
+    position: absolute;
+    left: 55px;
+    top: 10px;
+    font-size: 1.8em;
+    color: gray;
+}
+
+div.search-bar {
+    position: absolute;
+    left: 55px;
+    top: 5px;
+    right: 10px;
+}
+
+div.search-bar input {
+    height: 34px;
+    font-size: 1.5em;
+    width: 100%;
+    background-color: #111;
+    border: none;
+    border-bottom: 1px solid gray;
+    color: gray;
+    font-style: italic;
+}
+
+div.search-results {
+    width: 100%;
+    background-color: #333;
+    position: absolute;
+    top: 51px;
+    bottom: 136px;
+    overflow-y: scroll;
+}
+
+div.search-result {
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.5em;
+    border-bottom: 1px solid gray;
+    color: lightgray;
+    padding-left: 5px;
+    width: 95%;
+    overflow: hidden;
+}
+
+span.result-artist {
+    font-style: italic;
+    font-size: 0.5em;
+}
+
+div.clear-search {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    font-size: 1.8em;
+    color: gray;
+}
+
+.artwork {
+    position: absolute;
+    top: 50px;
+    bottom: 160px;
+    left: 0px;
+    right: 0px;
+    padding: 10px;
+    text-align: center;
+  }
+
+.artwork img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    zoom: 10;
+}
