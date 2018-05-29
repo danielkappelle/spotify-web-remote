@@ -108,7 +108,7 @@ app.get('/api/search/:q', function(req, res, next) {
 })
 
 /* The front end */
-app.use(express.static(path.join(__dirname, '../client/dist/')));
+app.use(express.static(path.join(__dirname, '../client/app/dist/')));
 
 /* Optional: port on which the server listens */
 if(typeof(process.env.NODE_PORT) !== 'undefined') {
