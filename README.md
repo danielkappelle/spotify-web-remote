@@ -16,11 +16,9 @@ This is a web based remote/commander for spotify. It works with the Spotify web 
 
 ## Run locally (Not up to date!)
 - Install node packages, `$ npm install` (in root folder)
-- Install client packages (in client folder)
+- Install client packages (in client folder, `client/app`)
   - Run npm `$ npm install`
-  - Run bower `$ bower install`
-  - Run grunt `$ grunt`
-  - (Optional: `$ grunt watch`)
+  - Run build `$ npm run build`
 - Run server `$ node .`
 
 ## Deploy
