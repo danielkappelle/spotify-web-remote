@@ -96,7 +96,7 @@ class Header extends Component {
         let searchResults = []
         /* tracks */
         _.forEach(result.body.tracks.items, (track) => {
-          searchResults.push({name: track.name, uri: track.uri})
+          searchResults.push({name: track.name, uri: track.uri, artist: track.artists.map(x => x.name).join(', ')})
         })
         if (this.searchCounter === currentSearchCounter) {
           this.props.onResultsChange(searchResults)
@@ -148,7 +148,7 @@ class SearchResult extends Component {
 
   render () {
     return (
-      <div className='search-result' onClick={this.playSong}>{this.props.result.name}</div>
+      <div className='search-result' onClick={this.playSong}>{this.props.result.name} <span className='result-artist'>{this.props.result.artist}</span></div>
     )
   }
 }

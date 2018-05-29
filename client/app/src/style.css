@@ -93,6 +93,11 @@ div.search-result {
     overflow: hidden;
 }
 
+span.result-artist {
+    font-style: italic;
+    font-size: 0.5em;
+}
+
 div.clear-search {
     position: absolute;
     top: 4px;
