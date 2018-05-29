@@ -28,6 +28,7 @@ function refresh(callback) {
   
       // Save the access token so that it's used in future calls
       spotifyApi.setAccessToken(data.body['access_token']);
+      console.log(data.body['access_token'])
       callback.call();
     }, function(err) {
       console.log('Could not refresh access token', err);
@@ -76,7 +77,7 @@ app.get('/api/control/:control', function(req,res,next) {
             break;
     }
     prom.then(function() {
-        res.send(200);
+        res.send({status: 'ok'})
     }, function(err) {
         console.log(err);
         refresh(function() {
@@ -85,17 +86,29 @@ app.get('/api/control/:control', function(req,res,next) {
     });
 });
 
-app.get('/api/control/volume/:volume', function(req, res, next) {
-    spotifyApi.setVolume(req.params.volume).then(function() {
-        res.send(200);  
-    }, function(err) {
-        console.log(err);
-        res.send(501);
-    });
-});
+app.get('/api/play/:track', function(req, res, next) {
+    spotifyApi.play({uris: [req.params.track]})
+        .then(function() {
+            res.send({status: 'ok'})
+        }, function(err) {
+            console.log(err)
+            res.send(500)
+        })
+})
+
+
+app.get('/api/search/:q', function(req, res, next) {
+    spotifyApi.search(req.params.q, ['album', 'artist', 'playlist', 'track'])
+        .then(function(result) {
+            res.send(result)
+        }, function(err) {
+            console.log(err)
+            res.sendStatus(500)
+        })
+})
 
 /* The front end */
-app.use(express.static(path.join(__dirname, '../client/dist/')));
+app.use(express.static(path.join(__dirname, '../client/app/dist/')));
 
 /* Optional: port on which the server listens */
 if(typeof(process.env.NODE_PORT) !== 'undefined') {
