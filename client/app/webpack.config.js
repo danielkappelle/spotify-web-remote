@@ -11,10 +11,12 @@ module.exports = {
     rules: [
       {test: /\.(jsx|js)$/, exclude: /node_modules/, use: {loader: 'babel-loader'}},
       {test: /\.css$/, use: ['style-loader', 'css-loader']},
-      {test: /\.(woff(2)?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'}
+      {test: /\.(woff(2)?|ttf|eot|svg|png|otf)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'}
     ]
   },
-  plugins: [htmlPlugin],
+  plugins: [
+    htmlPlugin
+  ],
   devServer: {
     proxy: {
       '/api': {

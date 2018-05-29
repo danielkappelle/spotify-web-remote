@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import './style.css'
 import 'font-awesome/css/font-awesome.css'
+import logohuis from './logo-huis.png'
 import logo from './logo.svg'
 import * as api from './api.js'
 import * as _ from 'lodash'
+import Favicon from 'react-favicon'
 
 class App extends Component {
   constructor (props) {
@@ -28,6 +30,19 @@ class App extends Component {
       () => this.update(),
       1000
     )
+
+    var head = document.getElementsByTagName('head')[0]
+    var linkEl = document.createElement('link')
+    linkEl.rel = 'apple-touch-icon'
+    linkEl.href = logohuis
+    head.appendChild(linkEl)
+
+    head = document.getElementsByTagName('head')[0]
+    linkEl = document.createElement('link')
+    linkEl.rel = 'icon'
+    linkEl.href = logohuis
+    linkEl.type = 'image/png'
+    head.appendChild(linkEl)
   }
 
   componentWillUnmount () {
@@ -69,6 +84,7 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
+        <Favicon url={logohuis} />
         <Header onResultsChange={this.onResultsChange} showSearch={this.state.showSearch} openSearch={this.openSearch} clearSearch={this.clearSearch} />
         <Body artworkUrl={this.state.artworkUrl} searchResults={this.state.searchResults} clearSearch={this.clearSearch} />
         <Controls artist={this.state.artist} song={this.state.song} playing={this.state.playing} />
