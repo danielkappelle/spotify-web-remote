@@ -1,0 +1,22 @@
+version: "3"
+services:
+    server:
+        image: test-spotify
+        deploy:
+            restart_policy:
+                condition: on-failure
+        build:
+            context: .
+            dockerfile: Dockerfile
+    client:
+        image: test-spotify-client
+        deploy:
+            restart_policy:
+                condition: on-failure
+        ports:
+            - "1235:8080"
+        links:
+            - server
+        build:
+            context: ./client/app
+            dockerfile: Dockerfile
