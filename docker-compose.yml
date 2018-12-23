@@ -8,6 +8,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        env_file:
+            - config.env
     client:
         image: test-spotify-client
         deploy:

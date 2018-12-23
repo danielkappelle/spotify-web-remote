@@ -2,10 +2,16 @@ const express = require('express');
 const app = express();
 
 const path = require('path');
-const request = require('request');
 
 const SpotifyWebApi = require('spotify-web-api-node');
-const config = require('./config');
+
+const config = {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: process.env.REDIRECT_URI,
+    accessToken: process.env.ACCESS_TOKEN,
+    refreshToken: process.env.REFRESH_TOKEN
+}
 
 /* Initalize the Spotify API */
 var spotifyApi = new SpotifyWebApi({
