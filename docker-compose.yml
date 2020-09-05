@@ -1,24 +1,18 @@
 version: "3"
 services:
     server:
-        image: test-spotify
+        image: danielkappelle/spotify-web-remote
         deploy:
             restart_policy:
                 condition: on-failure
-        build:
-            context: .
-            dockerfile: Dockerfile
         env_file:
             - config.env
     client:
-        image: test-spotify-client
+        image: danielkappelle/spotify-web-remote-client
         deploy:
             restart_policy:
                 condition: on-failure
         ports:
-            - "1235:8080"
+            - "3002:80"
         links:
             - server
-        build:
-            context: ./client/app
-            dockerfile: Dockerfile
