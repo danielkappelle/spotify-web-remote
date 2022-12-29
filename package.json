@@ -21,6 +21,6 @@
     "express": "^4.16.2",
     "request": "^2.83.0",
     "spotify-web-api-node": "^2.5.0",
-    "webpack": "^4.8.3"
+    "webpack": "^5.75.0"
   }
 }
